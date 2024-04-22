@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {SYMBOL_X, SYMBOL_O} from "./constants";
+import { SYMBOL_X, SYMBOL_O } from "./constants";
 
 const computeWinner = (cells) => {
   const lines = [
