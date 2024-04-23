@@ -9,13 +9,10 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    gridTemplateColumns: {
-      // Simple 16 column grid
-      "game-field": "repeat(3, 30px)",
-    },
-    gridTemplateRows: {
-      // Simple 16 column grid
-      "game-field": "repeat(3, 30px)",
+    extend: {
+      lineHeight: {
+        tight: '1.2',
+      },
     },
   },
   plugins: [],
