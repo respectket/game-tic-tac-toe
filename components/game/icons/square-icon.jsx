@@ -13,11 +13,6 @@ export function SquareIcon() {
             fill="#C026D3"
           />
         </g>
-        <defs>
-          <clipPath id="clip0_9412_1207">
-            <rect width="12" height="12" fill="white" />
-          </clipPath>
-        </defs>
       </svg>
     );
 }
