@@ -7,7 +7,7 @@ export default function HomePage() {
       <Header />
       <main className="pt-6 mx-auto w-max">
         <GameTitle />
-        <GameInfo className="mt-4"/>
+        <GameInfo className="mt-4" />
         <GameField className="mt-6" />
       </main>
     </div>
