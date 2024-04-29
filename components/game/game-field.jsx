@@ -1,11 +1,11 @@
 import clsx from "clsx";
-import { ZeroIcon } from "./icons/zero-icon";
-import { CrossIcon } from "./icons/cross-icon";
 import { UiButton } from "../uikit/ui-button";
-
-const cells = new Array(19 * 19).fill(null);
+import { GameSymbol } from "./game-symbol";
+import { useGameState } from "./use-game-state";
 
 export function GameField({ className }) {
+
+  const {cells, currentMove, handleCellClick, nextMove} = useGameState();
 
   const actions = (
       <>
@@ -20,23 +20,31 @@ export function GameField({ className }) {
 
   return (
     <GameFieldLayout className={className}>
-      <GameMoveInfo actions={actions} />
+      <GameMoveInfo
+        actions={actions}
+        currentMove={currentMove}
+        nextMove={nextMove}
+      />
 
       <GameGrid>
-          {cells.map((_, index) => (
-            <GameCell key={index}>
-
-            </GameCell>
-          ))}
+        {cells.map((symbol, index) => (
+          <GameCell
+            key={index}
+            onClick={() => {
+              handleCellClick(index);
+            }}
+          >
+            {symbol && <GameSymbol symbol={symbol} className="w-5 h-5" />}
+          </GameCell>
+        ))}
       </GameGrid>
-
-    </GameFieldLayout> 
+    </GameFieldLayout>
   );
 }
 
-function GameCell({ children }) {
+function GameCell({ children, onClick }) {
   return (
-    <button
+    <button onClick={onClick}
       className="border border-slate-200 -ml-px -mt-px flex items-center justify-center"
     >
       {children}
@@ -57,15 +65,15 @@ function GameFieldLayout({ children, className }) {
   )
 }
 
-function GameMoveInfo({ actions }) {
+function GameMoveInfo({ actions, currentMove, nextMove }) {
   return (
     <div className="flex items-center gap-3">
       <div className="mr-auto">
         <div className="flex items-center gap-1 text-xl leading-tight font-semibold">
-          Step: <ZeroIcon className="w-5 h-5" />
+          Step: <GameSymbol symbol={currentMove} className="w-5 h-5" />
         </div>
         <div className="flex items-center gap-1 text-xs leading-tight text-slate-400">
-          Next: <CrossIcon />
+          Next: <GameSymbol symbol={nextMove} className="w-3 h-3" />
         </div>
       </div>
       {actions}
