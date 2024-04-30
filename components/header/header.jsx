@@ -13,7 +13,7 @@ export function Header() {
         Play
       </UiButton>
       <button className="ml-auto flex items-center gap-2 text-start text-teal-600">
-        <Profile />
+        <Profile name="Vitalii" rating="1000" />
         <ArrowDownIcon />
       </button>
     </header>
