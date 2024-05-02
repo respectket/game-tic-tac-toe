@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { GameField, GameInfo, GameTitle, useGameState } from "../components/game";
 import { Header } from "../components/header";
+import { GameSymbol } from "../components/game/game-symbol";
 
 export default function HomePage() {
 
-  const [playersCount] = useState(2);
-  const { cells, currentMove, handleCellClick, nextMove, winnerSequence } =
+  const [playersCount] = useState(4);
+  const { cells, currentMove, handleCellClick, nextMove, winnerSequence, handlePlayerTimeOver, winnerSymbol } =
     useGameState(playersCount);
 
   return (
@@ -13,8 +14,28 @@ export default function HomePage() {
       <Header />
       <main className="pt-6 mx-auto w-max">
         <GameTitle playersCount={playersCount} />
-        <GameInfo playersCount={playersCount} className="mt-4" currentMove={currentMove} />
-        <GameField cells={cells} currentMove={currentMove} handleCellClick={handleCellClick} nextMove={nextMove} winnerSequence={winnerSequence} className="mt-6" />
+        <GameInfo
+          playersCount={playersCount}
+          className="mt-4"
+          currentMove={currentMove}
+          isWinner={!!winnerSymbol}
+          onPlayerTimeOver={handlePlayerTimeOver}
+        />
+        {winnerSymbol && (
+          <div className="my-4">
+            <GameSymbol symbol={winnerSymbol} />
+          </div>
+        )}
+
+        <GameField
+          cells={cells}
+          currentMove={currentMove}
+          handleCellClick={handleCellClick}
+          nextMove={nextMove}
+          winnerSequence={winnerSequence}
+          winnerSymbol={winnerSymbol}
+          className="mt-6"
+        />
       </main>
     </div>
   );
